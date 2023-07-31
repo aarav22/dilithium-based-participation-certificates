@@ -26,6 +26,9 @@ def sign(msg: bytes, sk: bytes) -> None:
         dict1 = {'Xmp.dc.signature': base64.b64encode(sig).decode('utf-8')}
         img.modify_xmp(dict1)
 
+        st.write(tbs_data)
+        st.write(tbs_data_hash.hex())
+
 
 st.title('Upload the certificate')
 cert = st.file_uploader('Upload the certificate', type=['png'], label_visibility='hidden')

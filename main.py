@@ -51,6 +51,7 @@ if imageBytes is not None:
 
         st.write(tbs_data)
         st.write(tbs_data_hash.hex())
+        
     # verify the signature
     if Dilithium2.verify(pk, tbs_data_hash, sig):
         st.sidebar.success('Signature verified')
