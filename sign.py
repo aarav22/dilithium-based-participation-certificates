@@ -31,6 +31,7 @@ st.title('Upload the certificate')
 cert = st.file_uploader('Upload the certificate', type=['png'], label_visibility='hidden')
 
 if cert is not None:
+    cert = cert.read()
     sign(cert, sk)
     st.write('Signed certificate')
     st.download_button('Download', cert, 'signed-cert.png')
