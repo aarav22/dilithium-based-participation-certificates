@@ -26,10 +26,10 @@ def sign(msg: bytes, sk: bytes) -> bytes:
         dict1 = {'Xmp.dc.signature': base64.b64encode(sig).decode('utf-8')}
         img.modify_xmp(dict1)
 
-        st.write(img.read_xmp())
+        # st.write(img.read_xmp())
 
-        st.write(tbs_data)
-        st.write(tbs_data_hash.hex())
+        # st.write(tbs_data)
+        # st.write(tbs_data_hash.hex())
 
         # save image to signed-cert.png
         return img.get_bytes()
@@ -42,7 +42,5 @@ if cert is not None:
     cert = cert.read()
     certBytes = sign(cert, sk)
 
-    with pyexiv2.ImageData(certBytes) as img:
-        st.write(img.read_xmp())
     st.write('Signed certificate')
     st.download_button('Download', certBytes, 'signed-cert.png')

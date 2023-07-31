@@ -49,8 +49,8 @@ if imageBytes is not None:
         tbs_data = {k: v for k, v in data.items() if k != 'Xmp.dc.signature'}
         tbs_data_hash = hashlib.sha256(str(tbs_data).encode('utf-8')).digest()
 
-        st.write(tbs_data_hash.hex())
-        st.write(img.read_xmp())
+        # st.write(tbs_data_hash.hex())
+        # st.write(img.read_xmp())
 
     # verify the signature
     if Dilithium2.verify(pk, tbs_data_hash, sig):
