@@ -26,6 +26,8 @@ def sign(msg: bytes, sk: bytes) -> None:
         dict1 = {'Xmp.dc.signature': base64.b64encode(sig).decode('utf-8')}
         img.modify_xmp(dict1)
 
+        st.write(img.read_xmp())
+
         st.write(tbs_data)
         st.write(tbs_data_hash.hex())
 
