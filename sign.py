@@ -12,7 +12,7 @@ with open('secret_key.pem', 'rb') as f:
 
 sk = base64.b64decode(sk)
 
-def sign(msg: bytes, sk: bytes) -> None:
+def sign(msg: bytes, sk: bytes) -> bytes:
     with pyexiv2.ImageData(msg) as img:
         data = img.read_xmp()
 
@@ -41,5 +41,8 @@ cert = st.file_uploader('Upload the certificate', type=['png'], label_visibility
 if cert is not None:
     cert = cert.read()
     certBytes = sign(cert, sk)
+
+    with pyexiv2.ImageData(certBytes) as img:
+        st.write(img.read_xmp())
     st.write('Signed certificate')
     st.download_button('Download', certBytes, 'signed-cert.png')
