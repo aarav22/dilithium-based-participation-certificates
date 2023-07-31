@@ -31,12 +31,15 @@ def sign(msg: bytes, sk: bytes) -> None:
         st.write(tbs_data)
         st.write(tbs_data_hash.hex())
 
+        # save image to signed-cert.png
+        return img.get_bytes()
+
 
 st.title('Upload the certificate')
 cert = st.file_uploader('Upload the certificate', type=['png'], label_visibility='hidden')
 
 if cert is not None:
     cert = cert.read()
-    sign(cert, sk)
+    certBytes = sign(cert, sk)
     st.write('Signed certificate')
-    st.download_button('Download', cert, 'signed-cert.png')
+    st.download_button('Download', certBytes, 'signed-cert.png')
