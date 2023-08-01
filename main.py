@@ -45,6 +45,9 @@ if add_file is not None:
 if imageBytes is not None:
     with pyexiv2.ImageData(imageBytes) as img:
         data = img.read_xmp()
+        if 'Xmp.dc.signature' not in data:
+            st.sidebar.error('No signature found')
+            st.stop()
         sig = base64.b64decode(data['Xmp.dc.signature'].encode('utf-8'))
         tbs_data = {k: v for k, v in data.items() if k != 'Xmp.dc.signature'}
         tbs_data_hash = hashlib.sha256(str(tbs_data).encode('utf-8')).digest()
