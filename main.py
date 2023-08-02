@@ -13,27 +13,10 @@ with open('public_key.pem', 'rb') as f:
 # decode the public key from base64
 pk = base64.b64decode(pk_b64)
 
-# add_logo('http://placekitten.com/120/120', height=100)
-
-# # Add a selectbox to the sidebar:
-# add_selectbox = st.sidebar.selectbox(
-#     'How would you like to be contacted?',
-#     ('Email', 'Home phone', 'Mobile phone')
-# )
-
-# Add an option to upload a file in the sidebar:
-# st.sidebar.title('Upload your signature')
-# add_file = st.sidebar.file_uploader(
-#     'Upload your signature',
-#     type=['txt', 'pem'],
-#     label_visibility='hidden'
-# )
-# st.sidebar.title('Department of Computer Science, Ashoka University')
-
 st.sidebar.title('Certificate Verification')
 
-st.sidebar.write("For Workshop on Lattice-based Post-Quantum Cryptography July 17-19, 2023")
-st.sidebar.write("Organized by Prof. Mahavir Jhawar, Department of Computer Science, Ashoka University")
+st.sidebar.write('''For "Workshop on Lattice-based Post-Quantum Cryptography" held from July 17-19, 2023''')
+st.sidebar.write("Organized by Mahavir Jhawar, Department of Computer Science, Ashoka University")
 
 add_file = st.sidebar.file_uploader(
     'Upload your certificate',
@@ -91,7 +74,7 @@ key_display_style = """
     background-color: black;
     padding: 10px;
     border-radius: 5px;
-    max-height: 300px; /* Maximum height of the container, after which it becomes scrollable */
+    max-height: 200px; /* Maximum height of the container, after which it becomes scrollable */
     width: 100%;
     word-wrap: break-word;
     overflow: auto; /* Enable scrolling when the content exceeds the maximum height */
@@ -99,21 +82,36 @@ key_display_style = """
     font-family: monospace; /* Use a monospaced font for better formatting */
 }
 .copy-button {
-    margin-top: 10px;
+    margin-top: 100px;
 }
 </style>
 """
 
-st.title('Workshop on Lattice-based Post-Quantum Cryptography')
-st.subheader('Public Key generated using Dilithium2, a lattice-based signature scheme. The public key is of size 1312 bytes.')
+# st.title('Workshop on Lattice-based Post-Quantum Cryptography')
+tab1, tab2 = st.tabs(["Public Key", "Verification Info"])
+c = st.container()
+tab1.header("Organizer's Public Key")
+tab1.write('''Generated using Dilithium2, a lattice-based signature scheme. The public key is of size 1312 bytes.''')
 
 # st.header("PK Value:")
 # Add custom CSS for key display
-st.markdown(key_display_style, unsafe_allow_html=True)
-st.markdown(f'<div class="key-container">{format_public_key(pk.hex())}</div>', unsafe_allow_html=True)
-
+tab1.markdown(key_display_style, unsafe_allow_html=True)
+tab1.markdown(f'<div class="key-container">{format_public_key(pk.hex())}</div>', unsafe_allow_html=True)
+# gap 
+tab1.write('')
 # Copy to Clipboard button
-if st.button("Copy to Clipboard"):
-    st.write("Key copied to clipboard!")
-    st.text(pk.hex())
+if tab1.button("Copy to Clipboard"):
+    tab1.write("Key copied to clipboard!")
 # use html to format the public key in a nice code box with fixed width and height:
+
+
+tab2.header("Dilithium2 Signature Verification")
+tab2.write('''Certificates presented to the participants of the workshop were digitally signed using the post-quantum signature scheme Dilithium. The signature is available in one of the metadata tags of the resulting .png file.''')
+tab2.write('''The signature is extraced from the image and verified using the public key of the organizer.''')
+
+tab2.write(''' The tags may look like this: ''')
+
+dict2 = {'Xmp.pdf.Author': 'aarav', 'Xmp.xmp.CreatorTool': 'Canva', 'Xmp.dc.signature': 'avYHRB6pQ8OW5pRqVpFWt1kXams50TTAOy6wsrTSq4xp1m3JSEFNkZC8B0oATiDiTTYjz+CCsdoc+lUip9biO7mT6ImGuR/Q5Yh0AqYEVyhJ0PfsLhF2vGjJaAiT9LzEecji8tDb0CrzGq7yP6/kld3h1gf0wyK04NIRfTreU9Q97/UmiSn9o/BimuuRTAxlbPj0QLRzBCkr7gqeeXKex1Ox9totNpQ ...[clipped]', 'Xmp.dc.title': {'lang="x-default"': 'lorem ipsum'}, 'Xmp.dc.creator': ['Dilithium2'], 'Xmp.Attrib.Ads': 'type="Seq"', 'Xmp.Attrib.Ads[1]': 'type="Struct"', 'Xmp.Attrib.Ads[1]/Attrib:Created': '2023-07-31', 'Xmp.Attrib.Ads[1]/Attrib:ExtId': '6f747215-1475-496c-8a98-d99e4d3ad6ae', 'Xmp.Attrib.Ads[1]/Attrib:FbId': '525265914179580', 'Xmp.Attrib.Ads[1]/Attrib:TouchType': '2'}
+
+tab2.write(dict2)
+ 
