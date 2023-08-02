@@ -1,4 +1,6 @@
 import streamlit as st
+from streamlit_extras.app_logo import add_logo
+
 import pyexiv2
 import base64
 import hashlib
@@ -11,6 +13,8 @@ with open('public_key.pem', 'rb') as f:
 
 # decode the public key from base64
 pk = base64.b64decode(pk_b64)
+
+# add_logo('http://placekitten.com/120/120', height=100)
 
 # # Add a selectbox to the sidebar:
 # add_selectbox = st.sidebar.selectbox(
@@ -25,13 +29,24 @@ pk = base64.b64decode(pk_b64)
 #     type=['txt', 'pem'],
 #     label_visibility='hidden'
 # )
+# st.sidebar.title('Department of Computer Science, Ashoka University')
 
-st.sidebar.title('Upload your certificate')
+st.sidebar.title('Certificate Verification')
+
+st.sidebar.write("For Workshop on Lattice-based Post-Quantum Cryptography July 17-19, 2023")
+st.sidebar.write("Organized by Prof. Mahavir Jhawar, Department of Computer Science, Ashoka University")
+
 add_file = st.sidebar.file_uploader(
     'Upload your certificate',
     type=['png'],
     label_visibility='hidden'
 )
+
+
+# This certificate has been signed using the post-quantum signature scheme Dilithium 
+# The public key of the organiser is available at  "website"
+# The signature is available in one of the metadata tags of the resulting .png file 
+# For verification, one may visit "website"' + ''')
 
 
 
@@ -63,26 +78,43 @@ if imageBytes is not None:
 
 
 
-# set max upload size to 1 MB
+def format_public_key(public_key):
+    # Add a line break every 64 characters to improve readability
+    # formatted_key = '\n'.join([public_key[i:i+64] for i in range(0, len(public_key), 64)])
+    formatted_key = public_key
+    # Wrap the key in a pre tag to preserve whitespace and formatting
+    return f"<pre>{formatted_key}</pre>"
 
+# Custom CSS to style the public key display
+key_display_style = """
+<style>
+.key-container {
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+    max-height: 300px; /* Maximum height of the container, after which it becomes scrollable */
+    width: 100%;
+    word-wrap: break-word;
+    overflow: auto; /* Enable scrolling when the content exceeds the maximum height */
+    white-space: pre-wrap; /* Preserve line breaks and wrap long lines */
+    font-family: monospace; /* Use a monospaced font for better formatting */
+}
+.copy-button {
+    margin-top: 10px;
+}
+</style>
+"""
 
-# Add a slider to the sidebar:
-# add_slider = st.sidebar.slider(
-#     'Select a range of values',
-#     0.0, 100.0, (25.0, 75.0)
-# )
+st.title('Workshop on Lattice-based Post-Quantum Cryptography')
+st.subheader('Public Key generated using Dilithium2, a lattice-based signature scheme. The public key is of size 1312 bytes.')
 
-# st.text('Fixed width text')
-# st.markdown('_Markdown_') # see *
-# st.caption('Balloons. Hundreds of them...')
-# st.latex(r''' e^{i\pi} + 1 = 0 ''')
-# st.write('Most objects') # df, err, func, keras!
-# st.write(['st', 'is <', 3]) # see *
-st.title('My PQC Workship Certificate Verification')
-st.header('Public Key')
-# st.subheader('My sub')
-# st.code('for i in range(8): foo()')
+# st.header("PK Value:")
+# Add custom CSS for key display
+st.markdown(key_display_style, unsafe_allow_html=True)
+st.markdown(f'<div class="key-container">{format_public_key(pk.hex())}</div>', unsafe_allow_html=True)
 
-
-# a large text box to show full public key to a user:
-st.code(pk_b64.hex(), 'markdown')
+# Copy to Clipboard button
+if st.button("Copy to Clipboard"):
+    st.write("Key copied to clipboard!")
+    st.text(pk.hex())
+# use html to format the public key in a nice code box with fixed width and height:
