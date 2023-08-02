@@ -15,7 +15,7 @@ pk = base64.b64decode(pk_b64)
 
 st.sidebar.title('Certificate Verification')
 
-st.sidebar.write('''For "Workshop on Lattice-based Post-Quantum Cryptography" held from July 17-19, 2023''')
+st.sidebar.write('''For "Workshop on Lattice-based Post-Quantum Cryptography" held from July 18-20, 2023''')
 st.sidebar.write("Organized by Mahavir Jhawar, Department of Computer Science, Ashoka University")
 
 add_file = st.sidebar.file_uploader(
@@ -111,7 +111,18 @@ tab2.write('''The signature is extraced from the image and verified using the pu
 
 tab2.write(''' The tags may look like this: ''')
 
-dict2 = {'Xmp.pdf.Author': 'aarav', 'Xmp.xmp.CreatorTool': 'Canva', 'Xmp.dc.signature': 'avYHRB6pQ8OW5pRqVpFWt1kXams50TTAOy6wsrTSq4xp1m3JSEFNkZC8B0oATiDiTTYjz+CCsdoc+lUip9biO7mT6ImGuR/Q5Yh0AqYEVyhJ0PfsLhF2vGjJaAiT9LzEecji8tDb0CrzGq7yP6/kld3h1gf0wyK04NIRfTreU9Q97/UmiSn9o/BimuuRTAxlbPj0QLRzBCkr7gqeeXKex1Ox9totNpQ ...[clipped]', 'Xmp.dc.title': {'lang="x-default"': 'lorem ipsum'}, 'Xmp.dc.creator': ['Dilithium2'], 'Xmp.Attrib.Ads': 'type="Seq"', 'Xmp.Attrib.Ads[1]': 'type="Struct"', 'Xmp.Attrib.Ads[1]/Attrib:Created': '2023-07-31', 'Xmp.Attrib.Ads[1]/Attrib:ExtId': '6f747215-1475-496c-8a98-d99e4d3ad6ae', 'Xmp.Attrib.Ads[1]/Attrib:FbId': '525265914179580', 'Xmp.Attrib.Ads[1]/Attrib:TouchType': '2'}
+dict2 = {'Xmp.pdf.Author': 'aarav', 'Xmp.xmp.CreatorTool': 'Canva', 'Xmp.dc.signature': 'avYHRB6pQ8OW5pRqVpFWt1kXams50T...[clipped]', 'Xmp.dc.title': {'lang="x-default"': 'lorem ipsum'}, 'Xmp.dc.creator': ['Dilithium2'], 'Xmp.Attrib.Ads': 'type="Seq"', 'Xmp.Attrib.Ads[1]': 'type="Struct"', 'Xmp.Attrib.Ads[1]/Attrib:Created': '2023-07-31', 'Xmp.Attrib.Ads[1]/Attrib:ExtId': '6f747215-1475-496c-8a98-d99e4d3ad6ae', 'Xmp.Attrib.Ads[1]/Attrib:FbId': '525265914179580', 'Xmp.Attrib.Ads[1]/Attrib:TouchType': '2'}
 
 tab2.write(dict2)
  
+hide_streamlit_style = """
+            <style>
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
+# add footer with text Made by Aarav (hyperlink it to https://github.com/aarav22)
+st.sidebar.write('')
+st.sidebar.write('')
+st.sidebar.markdown('Website made by [Aarav](https://github.com/aarav22)')
