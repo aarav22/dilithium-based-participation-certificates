@@ -46,11 +46,12 @@ if imageBytes is not None:
             st.sidebar.error('No signature found')
             st.stop()
         sig = base64.b64decode(data['Xmp.dc.signature'].encode('utf-8'))
-        tbs_data = {k: v for k, v in data.items() if k == 'Xmp.Attrib.Ads[1]/Attrib'}
+        tbs_data = data['Xmp.Attrib.Ads[1]/Attrib:ExtId']
         tbs_data_hash = hashlib.sha256(str(tbs_data).encode('utf-8')).digest()
 
         # st.write(tbs_data_hash.hex())
-        # st.write(str(tbs_data))
+        # st.write(data.keys())
+        # st.write()
 
     # verify the signature
     if Dilithium2.verify(pk, tbs_data_hash, sig):

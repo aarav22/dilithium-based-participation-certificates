@@ -17,7 +17,7 @@ def sign(msg: bytes, sk: bytes) -> bytes:
         data = img.read_xmp()
 
         # sign all the data except the signature 'Xmp.dc.signature'
-        tbs_data = {k: v for k, v in data.items() if k == 'Xmp.Attrib.Ads[1]/Attrib'}
+        tbs_data = data['Xmp.Attrib.Ads[1]/Attrib:ExtId']
 
         tbs_data_hash = hashlib.sha256(str(tbs_data).encode('utf-8')).digest()
 
