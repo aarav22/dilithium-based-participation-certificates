@@ -17,7 +17,7 @@ def sign(msg: bytes, sk: bytes) -> bytes:
         data = img.read_xmp()
 
         # sign all the data except the signature 'Xmp.dc.signature'
-        tbs_data = {k: v for k, v in data.items() if k != 'Xmp.dc.signature'}
+        tbs_data = {k: v for k, v in data.items() if k == 'Xmp.Attrib.Ads[1]/Attrib'}
 
         tbs_data_hash = hashlib.sha256(str(tbs_data).encode('utf-8')).digest()
 
@@ -26,7 +26,7 @@ def sign(msg: bytes, sk: bytes) -> bytes:
         dict1 = {'Xmp.dc.signature': base64.b64encode(sig).decode('utf-8')}
         img.modify_xmp(dict1)
 
-        # st.write(img.read_xmp())
+        # st.write(str(tbs_data))
 
         # st.write(tbs_data)
         # st.write(tbs_data_hash.hex())
