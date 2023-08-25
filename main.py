@@ -17,7 +17,16 @@ st.sidebar.title('Certificate Verification')
 
 st.sidebar.write('''For "Workshop on Lattice-based Post-Quantum Cryptography" held from July 18-20, 2023''')
 st.sidebar.write("Organized by Mahavir Jhawar, Department of Computer Science, Ashoka University")
+# lecture slides: https://drive.google.com/file/d/1Fmzx5GPQJLIjoEk9w5qvdkLpvhg6B9LU/view
+st.sidebar.write("Lecture slides avaliable at [link](https://drive.google.com/file/d/1Fmzx5GPQJLIjoEk9w5qvdkLpvhg6B9LU/view)")
 
+with open('Workshop_on_Lattice-based_Post-Quantum Cryptography.pdf', 'rb') as f:
+    st.sidebar.download_button(
+        label='Download Schedule',
+        data=f.read(),
+        file_name='Workshop_on_Lattice-based_Post-Quantum Cryptography.pdf',
+        mime='application/pdf',
+    )
 add_file = st.sidebar.file_uploader(
     'Upload your certificate',
     type=['png'],
