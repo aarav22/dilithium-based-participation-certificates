@@ -1,4 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
 env/
-**/.DS_Store
-__pycache__
-__*.py
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Streamlit
+.streamlit/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Keys (Never commit private keys!)
+keys/secret_key.pem
+keys/*.key
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
