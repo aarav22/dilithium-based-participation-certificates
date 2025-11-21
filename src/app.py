@@ -15,7 +15,7 @@ from ui_components import (
 
 # Page configuration
 st.set_page_config(
-    page_title="Participa Certificate Platform",
+    page_title="Participation Certificate Platform",
     page_icon="🔐",
     layout="wide"
 )
@@ -24,7 +24,7 @@ st.set_page_config(
 pk, sk = load_keys()
 
 # Main UI
-st.title("Participation Certificate Platform")
+st.title("Workshop Participation Certificate Platform")
 st.write("Post-quantum certificate signing and verification")
 
 # Main tabs
